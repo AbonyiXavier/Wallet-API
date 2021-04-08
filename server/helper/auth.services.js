@@ -2,16 +2,10 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
 const secretKey = process.env.JWT_KEY;
-const refreshKey = process.env.REFRESH_TOKEN_KEY;
 
 export default class AuthServices {
   static async generateJwt(payload, secret = secretKey) {
     const token = await jwt.sign({ payload }, secret, { expiresIn: '1d' });
-    return token;
-  }
-
-  static async refreshToken(payload, secret = refreshKey) {
-    const token = await jwt.sign({ payload }, secret, { expiresIn: '7d' });
     return token;
   }
 
@@ -30,5 +24,3 @@ export default class AuthServices {
     return vToken;
   }
 }
-
-// get from account

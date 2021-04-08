@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import UserController from '../controllers/user.controller';
+import verifyToken from '../middlewares/verifyToken';
 import Validation from '../validation/validation';
 const {
   validateSignupDetails,
@@ -12,6 +13,6 @@ const router = new Router();
 
 router.post('/signup', validateSignupDetails, signup);
 router.post('/login', validatePassword, validateLoginDetails, login);
-router.get('/users', getAllUsers);
+router.get('/users', verifyToken, getAllUsers);
 
 export default router;

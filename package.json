@@ -14,10 +14,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "migration": "npm run migrate:undo && npm run migrate",
     "migrate": "node_modules/.bin/sequelize db:migrate",
-    "migrate:undo": "node_modules/.bin/sequelize db:migrate:undo:all",
-    "seeder": "npm run seed:undo && npm run seed",
-    "seed": "node_modules/.bin/sequelize db:seed:all",
-    "seed:undo": "node_modules/.bin/sequelize db:seed:undo:all"
+    "migrate:undo": "node_modules/.bin/sequelize db:migrate:undo:all"
   },
   "dependencies": {
     "@babel/cli": "^7.12.1",

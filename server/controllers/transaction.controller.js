@@ -101,4 +101,32 @@ export default class TransactionController {
       return res.status(500).send({ message: error.message });
     }
   }
+
+  static async receipt(req, res) {
+    try {
+      const { id } = req.params;
+      const receipt = await model.Transactions.findOne({
+        where: {
+          id,
+        },
+        include: [
+          {
+            model: model.Users,
+            as: 'user',
+          },
+        ],
+      });
+      if (!receipt) {
+        return res.json({
+          message: 'No receipt found',
+        });
+      }
+      return res.json({
+        message: 'My receipt',
+        receipt,
+      });
+    } catch (error) {
+      return res.status(500).send({ message: error.message });
+    }
+  }
 }

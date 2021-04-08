@@ -45,9 +45,13 @@ You must have
 
 - As user get signup automatically the balance is Zero
 
+- Use the GET method
+- Use this url http://localhost:3000/api/v1/users
+- To get all users with their corresponding accounts (token is needed)
+
 ### Fund Wallet
 
-- Use the POST method
+- Use the POST method (token is needed)
 - Use this url http://localhost:3000/api/v1/paystack/fund
 - Paystack url is generated and used on the browser
 
@@ -55,10 +59,33 @@ You must have
 - Use this url http://localhost:3000/api/v1/paystack/callback
 - A verify payment to update the user balance is called automatically
 
+- Use the GET method
+- Use this url http://localhost:3000/api/v1/receipt/:id
+- To get user initial transaction receipt (token is needed)
+
 ### Send money from Wallet
 
 - Use the POST method
 - Use this url http://localhost:3000/api/v1/transfer
+
+- Use the GET method
+- Use this url http://localhost:3000/api/v1/gift-history
+- To get user gift history (token is needed)
+
+### Get Account balance from Wallet
+
+- Use the GET method
+- Use this url http://localhost:3000/api/v1/account (token is needed)
+
+### Withdraw money to bank Account from Wallet
+
+- Use the POST method
+- Use this url http://localhost:3000/api/v1/send-to-account
+- User can send money from his wallet to his account number specifying account and bank (token is needed)
+
+- Use the GET method
+- Use this url http://localhost:3000/api/v1/withdraw-history
+- To get user withdraw history (token is needed)
 
 ## Built With
 

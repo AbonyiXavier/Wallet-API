@@ -1,11 +1,11 @@
 import model from '../models';
 const { sequelize } = model;
 
-export default class GiftController {
-  static async transferFund(req, res) {
+export default class WithdrawController {
+  static async sendToAccount(req, res) {
     const t = await sequelize.transaction();
     try {
-      const { wallet_id } = req.body;
+      const { account_number } = req.body;
       const { id: userId } = req.user.payload;
       const user = await model.Users.findOne({
         where: {
@@ -24,12 +24,12 @@ export default class GiftController {
       const { balance } = accountDetails.dataValues;
 
       const amt = parseFloat(balance);
-      const { amount, description } = req.body;
+      const { amount, bank } = req.body;
 
       // checking user account amount against the one he wants to send
       if (amt < amount) {
         return res.status(403).json({
-          message: 'oops! Oga your balance is low',
+          message: 'insufficient fund',
         });
       }
 
@@ -48,44 +48,44 @@ export default class GiftController {
         { transaction: t }
       );
 
-      // Check for user wallet he wants to send to(the receiver wallet id)
+      // Check if user exist
       const account = await model.Accounts.findOne({
-        where: { wallet_id },
+        where: { userId },
       });
       if (!account) {
         return res.status(403).json({
-          message: 'sorry! no wallet id found',
+          message: 'sorry! no such account found',
         });
       }
       const { balance: bal } = account.dataValues;
 
       const money = parseFloat(bal);
 
-      // Sum the money and update the account of the receiver
+      // Sum the money and update the amount of the bank account you are sending to
       const newBal = money + parseFloat(amount);
 
-      await model.Accounts.update(
+      await model.Withdraws.update(
         {
-          balance: newBal,
+          amount: newBal,
         },
         {
           where: {
-            wallet_id,
+            account_number,
           },
         },
         { transaction: t }
       );
       const data = {
         userId,
-        wallet_id,
+        account_number,
         amount: +amount,
-        description,
+        bank,
       };
-      await model.Gifts.create(data, { transaction: t });
+      await model.Withdraws.create(data, { transaction: t });
       await t.commit();
       return res.json({
         data,
-        message: 'Gift transfer successfully',
+        message: 'send money to account was successful',
       });
     } catch (error) {
       await t.rollback();
@@ -93,9 +93,9 @@ export default class GiftController {
     }
   }
 
-  static async giftHistory(req, res) {
+  static async withdrawHistory(req, res) {
     try {
-      const gift = await model.Gifts.findAll({
+      const withdraw = await model.Withdraws.findAll({
         include: [
           {
             model: model.Users,
@@ -104,8 +104,8 @@ export default class GiftController {
         ],
       });
       return res.json({
-        gift,
-        message: 'Gift History',
+        withdraw,
+        message: 'Withdraw History',
       });
     } catch (error) {
       return res.status(500).send({ message: error.message });

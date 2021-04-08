@@ -69,4 +69,21 @@ export default class Validation {
       });
     }
   }
+
+  // static async validateAccountNumber(req, res, next) {
+  //   try {
+  //     const schema = joi.object().keys({
+  //       amount: joi.number().required(),
+  //       account_number: joi.number().regex(/^\d{10}$/),
+  //       // .required(),
+  //     });
+  //     await schema.validateAsync(req.body);
+  //     return next();
+  //   } catch (error) {
+  //     console.log('error', error);
+  //     // return res
+  //     //   .status(400)
+  //     //   .json({ success: false, error: error.details[0].message });
+  //   }
+  // }
 }

@@ -11,6 +11,8 @@ wallet API allow users to create account, fund their wallet from their Debit car
 
 To obtain a copy of this app download or clone the repository at this [url](https://github.com/AbonyiXavier/Wallet-API)
 
+Postman collection documentation link [url](postman collection: https://documenter.getpostman.com/view/7775892/TzCTa5Wj)
+
 # Prerequisites
 
 You must have
@@ -81,7 +83,7 @@ You must have
 
 - Use the POST method
 - Use this url https://wallet--api.herokuapp.com/api/v1/send-to-account
-- User can send money from his wallet to his account number specifying account and bank (token is needed)
+- User can send money from his wallet to his account number specifying account number, bank code and name (token is needed)
 
 - Use the GET method
 - Use this url https://wallet--api.herokuapp.com/api/v1/withdraw-history

@@ -21,13 +21,18 @@ module.exports = {
         allowNull: false,
       },
       account_number: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      bank: {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      bank_code: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

@@ -47,3 +47,65 @@ exports.verifyPayment = async (ref) => {
     }
   });
 };
+
+exports.verifyAccount = async (accNum, bankCode) => {
+  const options = {
+    url: `https://api.paystack.co/bank/resolve?account_number=${accNum}&bank_code=${bankCode}`,
+    headers: {
+      authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+      'content-type': 'application/json',
+      'cache-control': 'no-cache',
+    },
+    method: 'GET',
+  };
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios.request(options);
+      resolve(response.data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+exports.initializeTransferReceipt = async (form) => {
+  const options = {
+    url: 'https://api.paystack.co/transferrecipient',
+    headers: {
+      authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+      'content-type': 'application/json',
+      'cache-control': 'no-cache',
+    },
+    method: 'POST',
+    data: form,
+  };
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios.request(options);
+      resolve(response.data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+// Had error using this
+exports.initializeTransfer = async (form) => {
+  const options = {
+    url: 'https://api.paystack.co/transfer',
+    headers: {
+      authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+      'content-type': 'application/json',
+      'cache-control': 'no-cache',
+    },
+    method: 'POST',
+    data: form,
+  };
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios.request(options);
+      resolve(response.data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

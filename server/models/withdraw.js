@@ -5,10 +5,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     account_number: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    bank: {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    bank_code: {
       type: DataTypes.STRING,
       allowNull: false,
     },

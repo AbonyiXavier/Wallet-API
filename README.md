@@ -11,7 +11,7 @@ wallet API allow users to create account, fund their wallet from their Debit car
 
 To obtain a copy of this app download or clone the repository at this [url](https://github.com/AbonyiXavier/Wallet-API)
 
-Postman collection documentation link [url](postman collection: https://documenter.getpostman.com/view/7775892/TzCTa5Wj)
+Postman collection documentation link [url](https://documenter.getpostman.com/view/7775892/TzCTa5Wj)
 
 # Prerequisites
 

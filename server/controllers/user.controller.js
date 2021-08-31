@@ -22,7 +22,6 @@ export default class UserController {
         fullName: req.body.fullName,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 10),
-        // wallet_id: shortid.generate(),
       });
 
       const token = await generateJwt(userData);
@@ -30,8 +29,7 @@ export default class UserController {
       const data = {
         id: userData.id,
         fullName: userData.fullName,
-        email: userData.email,
-        // wallet_id: userData.wallet_id,
+        email: userData.email
       };
       data.token = token;
 
